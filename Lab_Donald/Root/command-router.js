@@ -7,7 +7,7 @@
 //todo _______________________________
 
 const comandRouter = require('express').Router()
-const comandController = require('../Controllers/burger-controller')
+const comandController = require('../Controllers/command-controller')
 const bodyValidator = require('../Middleware/body-validator')
 const idValidator = require('../Middleware/id-validator')
 const commandValidator = require('../Validators/command_for-body-validator')
@@ -24,11 +24,11 @@ const commandValidator = require('../Validators/command_for-body-validator')
 
 //* ------methode long (repetition)--------------
 
-comandRouter.get('/', comandController.getALL)
+comandRouter.get('/', comandController.getAll)
 
 comandRouter.get('/:id', idValidator(), comandController.getById)
 
-comandRouter.post('/',bodyValidator(commandValidator), comandController.creat)
+comandRouter.post('/',bodyValidator(commandValidator), comandController.creat) //
 
 comandRouter.put('/:id', idValidator(),bodyValidator(commandValidator), comandController.update)
 

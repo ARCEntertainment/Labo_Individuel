@@ -14,16 +14,8 @@ const yup = require('yup')
 //todo ____________________________
 const commandValidator = yup.object({
 
-    nameClient: yup.string().required().trim().min(2).max(50),
-    nameBurger: yup.string().required().trim().min(3).max(50),
-    idBurger: yup.string().required().matches(idRegex),
-
-    adressClient: {
-        codepostal: yup.string().required().trim().min(4).max(4),
-        ville: yup.string().required().trim().min(2).max(25),
-        rue: yup.string().required().trim().min(2).max(25),
-        numero: yup.string().required().trim().min(2).max(4),
-    },
+    idClient: yup.string().required().matches(idRegex),
+    burgers: yup.array().of(yup.object({idBurger: yup.string().matches(idRegex)})),
     status: yup.string().required().matches(statusRegex),
 })
 

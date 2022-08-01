@@ -5,7 +5,7 @@
 //todo imported MODELS (command)
 //todo ________________________________
 
-const Comand = require('../Models/command-model')
+const Command = require('../Models/command-model')
 
 
 
@@ -24,7 +24,7 @@ const comandController = {
 
     getAll: async (req, res) => {
 
-        const comandAll = await Comand.find()
+        const comandAll = await Command.find()
 
         res.status(200).json(comandAll)
     },
@@ -33,18 +33,18 @@ const comandController = {
     getById: async (req, res) => {
         const id = req.params.id
 
-        Comand.findById(id)
+        const command = await Command.findById(id)
 
-        if (!Comand) {
+        if (!command) {
             return res.sendStatus(404)
         }
-        res.status(200).json(Comand)
+        res.status(200).json(command)
     },
 
 
     creat: async (req, res) => {
 
-        const comandToADD = Comand(req.body)
+        const comandToADD = Command(req.body)
 
         await comandToADD.save()
 
@@ -55,13 +55,13 @@ const comandController = {
     update: async (req, res) => {
         const id = req.params.id
 
-        const commandUpdate = await Comand.findByIdAndUpdate(id,
+        const commandUpdate = await Command.findByIdAndUpdate(id,
             
             // STRUCTURE
             {
-                nameClient: req.body.nameClient,
-                nameBurger: req.body.nameBurger,
-                adressClient: req.body.adressClient,
+                idClient: req.body.idClient,
+                burgers: req.body.burgers,
+                status: req.body.status,
             }, 
 
 
@@ -81,7 +81,7 @@ const comandController = {
     delete: async (req, res) => {
         const id = req.params.id
 
-        const comandToDelete = await Comand.findByIdAndDelete(id)
+        const comandToDelete = await Command.findByIdAndDelete(id)
 
         if (comandToDelete) {
             res.sendStatus(204)

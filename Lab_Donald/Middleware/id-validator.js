@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
 
 //todo STRUCTURE Function (Verification validation [ID])
 //todo _____________________________________
-const idValidator = (req, res, next) => {
+const idValidator = () => {
     return (req, res, next) => {
         const id = req.params.id
 

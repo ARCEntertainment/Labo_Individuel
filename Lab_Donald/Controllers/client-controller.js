@@ -32,12 +32,12 @@ const clientController = {
     getById: async (req, res) => {
         const id = req.params.id
 
-        Client.findById(id)
+        const clients = await Client.findById(id)
 
-        if (!Client) {
+        if (!clients) {
             return res.sendStatus(404)
         }
-        res.status(200).json(Client)
+        res.status(200).json(clients)
     },
 
 

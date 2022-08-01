@@ -4,7 +4,9 @@
 
 //todo Initialising MONGOOSE (Schema)
 //todo _______________________________
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types } = require('mongoose')
+const Burger = require('./burger-model')
+const Client = require('./client-model')
 
 
 
@@ -15,67 +17,40 @@ const comandSchema = new Schema(
 
     // STRUCTURE
     {
-        nameClient: { //! A changer avec COLLECTION USERS [ID]
+        idClient: { //! A changer avec COLLECTION USERS [ID]
 
-            type: String,
+            type: Types.ObjectId,
+            ref: Client,
             require: true,
             trim: true,
 
         },
 
-        nameBurger: {
-            type: String,
-            require: true,
-            trim: true
-        },
-
-        idBurger: {
-            type: String,
-            require: true,
-        },
-
-        adressClient: {
-
-            codepostal: {
-                type: String,
-                require: true,
-                trim: true,
-            },
-
-            ville: {
-                type: String,
-                require: true,
-                trim: true,
-            },
-
-            rue: {
-                type: String,
-                require: true,
-                trim: true,
-            },
-
-            numero: {
-                type: String,
-                require: true,
-                trim: true,
+        burgers: [
+            {
+                idBurger: {
+                    type: Types.ObjectId,
+                    ref: Burger,
+                    require: true,
+                },
             }
-        },
+        ],
 
         status: {
-                type: String,
-                require: true,
-                enum: ['Engage', 'in progress', 'finish'],
-                default: 'Engage'
+            type: String,
+            require: true,
+            enum: ['Engage', 'in progress', 'finish'],
+            default: 'Engage'
 
-            }
-        },
-        
-        // OPTION
-        {
-            collection: 'Command',
-            timestamps: true
         }
-        )
+    },
+
+    // OPTION
+    {
+        collection: 'Command',
+        timestamps: true
+    }
+)
 
 
 
