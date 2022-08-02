@@ -33,6 +33,12 @@ const comandSchema = new Schema(
                     ref: Burger,
                     require: true,
                 },
+
+                suplement: [{
+                    type: String,
+                    trim: true,
+                    enum: ['Crudity', 'Salsa', 'Cheese', 'Double Meat'],
+                }]
             }
         ],
 
@@ -44,13 +50,6 @@ const comandSchema = new Schema(
 
         },
 
-        suplement: {
-            type: String,
-            trim: true,
-            enum: ['Crudity', 'Salsa', 'Cheese', 'Double Meat', 'nean'],
-            default: 'nean'
-
-        }
     },
 
     // OPTION

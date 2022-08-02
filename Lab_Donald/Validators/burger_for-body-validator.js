@@ -13,9 +13,9 @@ const yup = require('yup')
 //todo ____________________________
 const burgerValidator = yup.object({
     name: yup.string().required().trim().min(3).max(50),
-    info: yup.string().trim(),
-    prix: yup.string().required(),
-    alergene: yup.string().required().trim(),
+    ingredient: yup.array(),
+    prix: yup.number().required(),
+    alergene: yup.array(), // yup.array modifier
 })
 
 

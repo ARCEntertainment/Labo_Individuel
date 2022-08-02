@@ -15,10 +15,12 @@ const yup = require('yup')
 const commandValidator = yup.object({
 
     idClient: yup.string().required().matches(idRegex),
-    burgers: yup.array().of(yup.object({idBurger: yup.string().matches(idRegex)})),
+    burgers: yup.array().of(yup.object({idBurger: yup.string().matches(idRegex), suplement: yup.array()})),
     status: yup.string().required().matches(statusRegex),
-    suplement: yup.string().trim(),
+
 })
+
+// Creer 2eme validator Update sans (idClient)
 
 
 

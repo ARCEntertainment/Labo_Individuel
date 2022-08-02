@@ -20,26 +20,25 @@ const burgerSchema = new Schema(
             unique: true,
             trim: true
         },
-        info: {
+        ingredient: [{
             type: String,
             trim: true,
             enum: ['Beef', 'Fish', 'Tofu', 'Cheese', 'Crudity', 'Salsa'],
-            default: 'Beef'
 
-        },
+        }],
+
         prix: {
-            type: String,
+            type: Number,
             require: true,
             trim: true
         },
 
-        alergene: {
+        alergene: [{
             type: String,
             require: true,
             trim: true,
             enum: ['lactose', 'Arachide', 'gluten'],
-            default: 'gluten'
-        }
+        }]
 
     },
 

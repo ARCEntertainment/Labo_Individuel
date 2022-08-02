@@ -25,7 +25,7 @@ clientRooter.get('/', clientController.getAll)
 
 clientRooter.get('/:id', idValidator(), clientController.getById)
 
-clientRooter.post('/', clientController.creat)
+//todo clientRooter.post('/', clientController.creat)
 
 clientRooter.put('/:id', idValidator(), clientController.update)
 

@@ -34,8 +34,8 @@ const comandController = {
             })
 
             .populate({
-                path: 'burgers',
-                populate: { path: 'idBurger', select: { name: 1, info: 1, prix: 1, alergene: 1 } }
+                path: 'burgers.idBurger',
+                select: { name: 1, info: 1, prix: 1, alergene: 1 } 
             })
 
         res.status(200).json(comandAll)
@@ -54,8 +54,8 @@ const comandController = {
             })
 
             .populate({
-                path: 'burgers',
-                populate: { path: 'idBurger', select: { name: 1, info: 1, prix: 1, alergene: 1 } }
+                path: 'burgers.idBurger',
+                select: { name: 1, info: 1, prix: 1, alergene: 1 } 
             })
 
 
@@ -83,10 +83,8 @@ const comandController = {
 
             // STRUCTURE
             {
-                idClient: req.body.idClient,
                 burgers: req.body.burgers,
                 status: req.body.status,
-                suplement: req.body.suplement,
             },
 
 

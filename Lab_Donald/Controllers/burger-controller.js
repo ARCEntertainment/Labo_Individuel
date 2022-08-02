@@ -63,8 +63,9 @@ const burgerController = {
             // STRUCTURE
             {
                 name: req.body.name,
-                info: req.body.info,
-                prix: req.body.prix
+                ingredient: req.body.ingredient,
+                prix: req.body.prix,
+                alergene: req.body.alergene
             },
 
             // OPTION

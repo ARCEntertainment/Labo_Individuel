@@ -34,7 +34,7 @@ const authController = {
         //* STRUCTURE
         //* -------------------------------------
 
-        if (!Client) {
+        if (!user) {
             return res.status(401).json({ error: 'Bad Credential' })
         }
         // ELSE

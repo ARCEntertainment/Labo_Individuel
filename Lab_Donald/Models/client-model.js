@@ -31,9 +31,8 @@ const clientSchema = new Schema(
         adress: {
 
             codepostal: {
-                type: String,
+                type: Number,
                 require: true,
-                trim: true,
             },
 
             ville: {
