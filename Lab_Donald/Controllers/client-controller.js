@@ -2,11 +2,21 @@
 
 
 
+//todo imported DTO
+//todo ________________________________
+const clientDTO = require('../DTO/client-dto')
+
+
+
 //todo imported MODELS (clients)
 //todo ________________________________
 const Client = require('../Models/client-model')
 
 
+
+//todo FUNCTION Mappage CLIENT
+//todo _________________________________
+const clientMapToDTO = (client) => new clientDTO(client.id, client.firstname, client.lastname, client.adress, client.email, client.pseudo)
 
 
 //todo CONTROLLER Client configuration
@@ -23,21 +33,30 @@ const clientController = {
 
     getAll: async (req, res) => {
 
+        // Structur Find
         const clientALL = await Client.find()
 
-        res.status(200).json(clientALL)
+
+        // DTO Conversion
+        const clientToDto = clientALL.map(clientMapToDTO)
+
+        res.status(200).json(clientToDto)
     },
 
 
     getById: async (req, res) => {
         const id = req.params.id
 
+        // Structure Find
         const clients = await Client.findById(id)
 
         if (!clients) {
             return res.sendStatus(404)
         }
-        res.status(200).json(clients)
+
+        // DTO Conversion
+        const clientToDto = clientMapToDTO(clients)
+        res.status(200).json(clientToDto)
     },
 
 
@@ -69,6 +88,7 @@ const clientController = {
                 },
 
                 email: req.body.email,
+                pseudo: req.body.pseudo,
             },
 
 
@@ -79,7 +99,10 @@ const clientController = {
         )
 
         if (clientUpdate) {
-            res.status(200).json(clientUpdate)
+
+            // DTO Conversion
+            const clientToDto = clientMapToDTO(clientUpdate)
+            return res.status(200).json(clientToDto)
         }
         return res.sendStatus(404)
     },
