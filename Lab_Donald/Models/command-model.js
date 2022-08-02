@@ -42,6 +42,14 @@ const comandSchema = new Schema(
             enum: ['Engage', 'in progress', 'finish'],
             default: 'Engage'
 
+        },
+
+        suplement: {
+            type: String,
+            trim: true,
+            enum: ['Crudity', 'Salsa', 'Cheese', 'Double Meat', 'nean'],
+            default: 'nean'
+
         }
     },
 

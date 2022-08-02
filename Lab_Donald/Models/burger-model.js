@@ -31,7 +31,14 @@ const burgerSchema = new Schema(
             type: String,
             require: true,
             trim: true
+        },
 
+        alergene: {
+            type: String,
+            require: true,
+            trim: true,
+            enum: ['lactose', 'Arachide', 'gluten'],
+            default: 'gluten'
         }
 
     },

@@ -7,6 +7,7 @@
 const burgerRouter = require('./burger-router')
 const comandRouter = require('./command-router')
 const clientRouter = require('./client-router')
+const authRouter = require('./auth-router')
 
 
 
@@ -24,7 +25,8 @@ const router = require('express').Router()
 
 router.use('/burger', burgerRouter)
 router.use('/command', comandRouter)
-router.use('/client', clientRouter )
+router.use('/client', clientRouter)
+router.use('/auth', authRouter)
 
 
 

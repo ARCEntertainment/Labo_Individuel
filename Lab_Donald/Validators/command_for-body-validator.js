@@ -17,6 +17,7 @@ const commandValidator = yup.object({
     idClient: yup.string().required().matches(idRegex),
     burgers: yup.array().of(yup.object({idBurger: yup.string().matches(idRegex)})),
     status: yup.string().required().matches(statusRegex),
+    suplement: yup.string().trim(),
 })
 
 

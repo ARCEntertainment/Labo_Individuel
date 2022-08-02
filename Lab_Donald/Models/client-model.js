@@ -62,25 +62,25 @@ const clientSchema = new Schema(
             trim: true
         },
 
-        // pseudo: {
-        //     type: String,
-        //     unique: true,
-        //     require: true,
-        //     trim: true
+        pseudo: {
+            type: String,
+            unique: true,
+            require: true,
+            trim: true
 
-        // },
+        },
 
-        // password: {
-        //     type: String,
-        //     require: true,
-        // },
+        password: {
+            type: String,
+            require: true,
+        },
 
-        // role: {
-        //     type: String,
-        //     enum: ['User', 'Moderator', 'Admin'],
-        //     require: true,
-        //     default: 'User'
-        // }
+        role: {
+            type: String,
+            enum: ['User', 'Moderator', 'Admin'],
+            require: true,
+            default: 'User'
+        }
     },
 
     // OPTION
