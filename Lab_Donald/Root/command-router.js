@@ -8,9 +8,11 @@
 
 const comandRouter = require('express').Router()
 const comandController = require('../Controllers/command-controller')
+const authentication = require('../Middleware/auth-jwt')
 const bodyValidator = require('../Middleware/body-validator')
+const {insertCommandValidator, updateCommandValidator} = require('../Validators/command_for-body-validator')
 const idValidator = require('../Middleware/id-validator')
-const commandValidator = require('../Validators/command_for-body-validator')
+
 
 
 
@@ -24,15 +26,15 @@ const commandValidator = require('../Validators/command_for-body-validator')
 
 //* ------methode long (repetition)--------------
 
-comandRouter.get('/', comandController.getAll)
+comandRouter.get('/', authentication('Moderator', 'Admin'), comandController.getAll)
 
-comandRouter.get('/:id', idValidator(), comandController.getById)
+comandRouter.get('/:id', authentication(), idValidator(), comandController.getById)
 
-comandRouter.post('/',bodyValidator(commandValidator), comandController.creat) //
+comandRouter.post('/', authentication('Moderator', 'Admin'), bodyValidator(insertCommandValidator), comandController.creat) //
 
-comandRouter.put('/:id', idValidator(),bodyValidator(commandValidator), comandController.update)
+comandRouter.put('/:id', authentication('Moderator', 'Admin'), idValidator(),bodyValidator(updateCommandValidator), comandController.update)
 
-comandRouter.delete('/:id', idValidator(), comandController.delete)
+comandRouter.delete('/:id', authentication('Admin'), idValidator(), comandController.delete)
 
 
 

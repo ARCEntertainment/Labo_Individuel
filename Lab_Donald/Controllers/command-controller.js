@@ -26,7 +26,32 @@ const comandController = {
 
     getAll: async (req, res) => {
 
-        const comandAll = await Command.find()
+        // Offset and Limit Declaration
+        const offset = req.query.offset ? req.query.offset : 0
+        const limit = req.query.limit ? req.query.limit : 10
+
+        // Filter Creation
+        let statusFilters;
+        const status = req.query.status
+
+        // Structure Status Find
+        if (status) {
+
+
+            if (Array.isArray(status)) {
+                statusFilters = { status: { $in: status } }
+            }
+            else {
+                statusFilters = { status: status }
+            }
+        }
+
+        else {
+            statusFilters = {}
+        }
+
+        // Structure Find
+        const comandAll = await Command.find(statusFilters)
 
             .populate({
                 path: 'idClient',
@@ -35,10 +60,21 @@ const comandController = {
 
             .populate({
                 path: 'burgers.idBurger',
-                select: { name: 1, info: 1, prix: 1, alergene: 1 } 
+                select: { name: 1, info: 1, prix: 1, alergene: 1 }
             })
 
-        res.status(200).json(comandAll)
+            .populate({
+                path: 'burgers.suplement'
+            })
+
+            .limit(limit)
+
+            .skip(offset)
+
+        const counts = await Command.countDocuments()
+        const data = {'Command': comandAll, counts}
+
+        res.status(200).json(data)
     },
 
 
@@ -55,7 +91,7 @@ const comandController = {
 
             .populate({
                 path: 'burgers.idBurger',
-                select: { name: 1, info: 1, prix: 1, alergene: 1 } 
+                select: { name: 1, info: 1, prix: 1, alergene: 1 }
             })
 
 

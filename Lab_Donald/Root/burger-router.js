@@ -28,13 +28,13 @@ const burgerValidator = require('../Validators/burger_for-body-validator')
 
 burgerRouter.get('/', burgerController.getALL)
 
-burgerRouter.get('/:id',idValidator(), burgerController.getById)
+burgerRouter.get('/:id', idValidator(), burgerController.getById)
 
-burgerRouter.post('/',bodyValidator(burgerValidator), burgerController.creat)
+burgerRouter.post('/', bodyValidator(burgerValidator), burgerController.creat)
 
-burgerRouter.put('/:id',idValidator(),bodyValidator(burgerValidator), burgerController.update)
+burgerRouter.put('/:id', idValidator(), bodyValidator(burgerValidator), burgerController.update)
 
-burgerRouter.delete('/:id',idValidator(), burgerController.delete)
+burgerRouter.delete('/:id', idValidator(), burgerController.delete)
 
 
 

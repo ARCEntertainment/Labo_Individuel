@@ -3,7 +3,9 @@
 
 // TOOLS Imported
 // _______________________________
-const authController = require('../Controllers/auth-controller')
+const authController = require('../Controllers/auth-controller');
+const  bodyValidator  = require('../Middleware/body-validator')
+const { loginValidator, registerValidator } = require('../Validators/auth_for-body-validator');
 
 
 
@@ -23,12 +25,12 @@ const authRouter = require('express').Router()
 
 //* ---------AUTHENTIFICATION----------
 
-authRouter.post('/login', authController.login);
+authRouter.post('/login', bodyValidator(loginValidator), authController.login);
 
 
 //* ----------REGISTRATION-------------
 
-authRouter.post('/register', authController.register);
+authRouter.post('/register', bodyValidator(registerValidator), authController.register);
 
 
 

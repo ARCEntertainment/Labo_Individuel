@@ -37,7 +37,7 @@ const burgerSchema = new Schema(
             type: String,
             require: true,
             trim: true,
-            enum: ['lactose', 'Arachide', 'gluten'],
+            enum: ['Lactose', 'Arachide', 'Gluten'],
         }]
 
     },

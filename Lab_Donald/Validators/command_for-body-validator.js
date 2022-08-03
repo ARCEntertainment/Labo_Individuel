@@ -12,18 +12,25 @@ const yup = require('yup')
 
 //todo STRUCTURE Validator
 //todo ____________________________
-const commandValidator = yup.object({
+const insertCommandValidator = yup.object({
 
     idClient: yup.string().required().matches(idRegex),
-    burgers: yup.array().of(yup.object({idBurger: yup.string().matches(idRegex), suplement: yup.array()})),
+    burgers: yup.array().of(yup.object({ idBurger: yup.string().matches(idRegex), suplement: yup.array() })),
     status: yup.string().required().matches(statusRegex),
 
 })
 
 // Creer 2eme validator Update sans (idClient)
 
+const updateCommandValidator = yup.object({
+
+    burgers: yup.array().of(yup.object({ idBurger: yup.string().matches(idRegex), suplement: yup.array() })),
+    status: yup.string().required().matches(statusRegex),
+
+})
+
 
 
 //todo EXPORT Validator
 //todo ____________________________
-module.exports = commandValidator
+module.exports = { insertCommandValidator, updateCommandValidator }

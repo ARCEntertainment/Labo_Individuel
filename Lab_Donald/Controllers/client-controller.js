@@ -16,7 +16,7 @@ const Client = require('../Models/client-model')
 
 //todo FUNCTION Mappage CLIENT
 //todo _________________________________
-const clientMapToDTO = (client) => new clientDTO(client.id, client.firstname, client.lastname, client.adress, client.email, client.pseudo)
+const clientMapToDTO = (client) => new clientDTO(client.id, client.pseudo, client.email, client.firstname, client.lastname, client.adress)
 
 
 //todo CONTROLLER Client configuration

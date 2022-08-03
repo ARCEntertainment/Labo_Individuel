@@ -45,7 +45,7 @@ const comandSchema = new Schema(
         status: {
             type: String,
             require: true,
-            enum: ['Engage', 'in progress', 'finish'],
+            enum: ['Engage', 'In progress', 'Finish'],
             default: 'Engage'
 
         },

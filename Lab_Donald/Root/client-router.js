@@ -7,7 +7,10 @@
 //todo _______________________________
 const clientRooter = require('express').Router()
 const clientController = require('../Controllers/client-controller')
+const authentication = require('../Middleware/auth-jwt')
 const idValidator = require('../Middleware/id-validator')
+const bodyValidator = require('../Middleware/body-validator')
+const clientValidator = require('../Validators/client_for-body-validator')
 
 
 
@@ -21,15 +24,13 @@ const idValidator = require('../Middleware/id-validator')
 
 
 //* ------methode long (repetition)--------------
-clientRooter.get('/', clientController.getAll)
+clientRooter.get('/', authentication(), clientController.getAll)
 
-clientRooter.get('/:id', idValidator(), clientController.getById)
+clientRooter.get('/:id', authentication(), bodyValidator(clientValidator), idValidator(), clientController.getById)
 
-//todo clientRooter.post('/', clientController.creat)
+clientRooter.put('/:id', authentication(), bodyValidator(clientValidator), idValidator(), clientController.update)
 
-clientRooter.put('/:id', idValidator(), clientController.update)
-
-clientRooter.delete('/:id', idValidator(), clientController.delete)
+clientRooter.delete('/:id', authentication('Admin'), idValidator(), clientController.delete)
 
 
 

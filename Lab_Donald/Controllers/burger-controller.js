@@ -4,6 +4,7 @@
 
 //todo imported MODELS (category)
 const Burger = require('../Models/burger-model')
+const { ArraySchema } = require('yup')
 
 
 //todo CONTROLLER Category configuration
@@ -19,9 +20,78 @@ const burgerController = {
 
     getALL: async (req, res) => {
 
-        const burgers = await Burger.find()
+        // Offset and Limit Declaration
+        const offset = req.query.offset ? req.query.offset : 0
+        const limit = req.query.limit ? req.query.limit : 10
 
-        res.status(200).json(burgers)
+        // Filter Creation
+        let alergeneFilters;
+        let ingredientFilters;
+        const ingredient = req.query.ingredient
+        const alergene = req.query.alergene
+
+        // Structure Alergene Find
+        if (alergene) {
+
+
+            if (Array.isArray(alergene)) {
+                alergeneFilters = { alergene: { $nin: alergene } }
+                // ingredientFilters = { ingredient: { $in: ingredient } }
+            }
+            else {
+                alergeneFilters = { alergene: alergene }
+                // ingredientFilters = { ingredient: ingredient }
+            }
+        }
+
+        else {
+            alergeneFilters = {}
+            // ingredientFilters = {}
+        }
+
+
+        // Structure Ingredient Find
+        if (ingredient) {
+
+
+            if (Array.isArray(alergene)) {
+                ingredientFilters = { ingredient: { $in: ingredient } }
+            }
+            else {
+                ingredientFilters = { ingredient: ingredient }
+            }
+        }
+
+        else {
+            ingredientFilters = {}
+        }
+
+        // Structure Find
+        const burgers = await Burger.find({ $and: [alergeneFilters, ingredientFilters] })
+
+            // .populate({
+            //     path: 'name',
+            //     // selecte: {name:1}
+            // })
+
+            // .populate({
+            //     path: 'prix',
+            //     // selecte: {name:1}
+            // })
+
+            // .populate({
+            //     path: 'ingredient',
+            //     // selecte: {enum:1}
+            // })
+
+            .limit(limit)
+
+            .skip(offset)
+
+        const counts = await Burger.countDocuments()
+        const data = { 'Burger': burgers, counts }
+
+        res.status(200).json(data)
     },
     //* ------------------------------------------
 
